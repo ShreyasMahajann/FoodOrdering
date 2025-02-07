@@ -1,7 +1,7 @@
-import User from "../models/userModel";
-import jwt from "jsonwebtoken";
+const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 
-export async function verifyToken(req, res, next) {
+exports.verifyToken = async function (req, res, next) {
   try {
     console.log("Verifying token");
     const token = req.headers["authorization"];
@@ -9,7 +9,7 @@ export async function verifyToken(req, res, next) {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token.replace("Bearer ", ""), process.env.JWT_SECRET);
     let user = await User.findOne({ email: decoded.email });
 
     if (!user) {
@@ -22,16 +22,16 @@ export async function verifyToken(req, res, next) {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-}
+};
 
-export function isAdmin(req, res, next) {
+exports.isAdmin = function (req, res, next) {
   try {
     console.log("Checking if user is admin");
-    const { role } = req.user;
-    if (role.includes("admin")) {
-      next();
+    if (!req.user || !req.user.role.includes("admin")) {
+      return res.status(403).json({ message: "Access denied" });
     }
+    next();
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-}
+};

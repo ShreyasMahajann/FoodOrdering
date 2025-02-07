@@ -1,6 +1,6 @@
-// routes/users.js
+const express = require('express');
+const router = express.Router();
 const admin = require('../controllers/adminControllers');
-const router = require('express').Router();
 
 router.get('/orders', admin.orders);
 router.post('/add-item', admin.addItem);

@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
-const routes = require('./routes/admin');
+const routes = require('./routes/routes');
 const mongoose = require('mongoose');
 const cors = require('cors');
+
 require('dotenv').config();
 
 const MAX_RETRIES = 5;
@@ -14,8 +15,7 @@ app.use(cors({
 }));
 
 // 1) GLOBAL MIDDLEWARES
-app.use('/',routes);
-
+app.use(routes);
 // db connection
 
 let retryCount = 0;
@@ -49,7 +49,7 @@ function retryConnection() {
 connectToDB();
 
 // Specify the port to listen on
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
