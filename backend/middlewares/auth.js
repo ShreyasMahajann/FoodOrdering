@@ -8,8 +8,10 @@ exports.verifyToken = async function (req, res, next) {
     if (!token) {
       return res.status(403).json({ message: "Unauthorized" });
     }
-
-    const decoded = jwt.verify(token.replace("Bearer ", ""), process.env.JWT_SECRET);
+    console.log(token)
+    const tokenData = token.replace("Bearer ", "");
+    console.log(tokenData)
+    const decoded = jwt.verify(tokenData, process.env.JWT_SECRET);
     let user = await User.findOne({ email: decoded.email });
 
     if (!user) {

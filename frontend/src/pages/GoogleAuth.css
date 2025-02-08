@@ -1,0 +1,38 @@
+/* GoogleAuth.css */
+.google-auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+.google-auth-container h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.google-auth-container #google-button {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.google-auth-container .login-message {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+}
+
+.google-auth-container .login-message.success {
+    color: #28a745;
+}
+
+.google-auth-container .login-message.error {
+    color: #dc3545;
+}

@@ -6,16 +6,14 @@ const orderSchema = new mongoose.Schema({
         required: [true, 'An order must have an id'],
     },
     user: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         ref: 'User',
         required: [true, 'An order must have a user'],
     },
-    products: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Product',
-        },
-    ],
+    products: {
+        type: [String],
+        required: [true, 'An order must have products'],
+    },
     total: {
         type: Number,
         required: [true, 'An order must have a total'],
