@@ -13,8 +13,20 @@ exports.products = async (req, res) => {
 exports.order = async (req, res) => {
     try {
         const order = req.body;
-        const newOrder = await Order.create(order);
+        if (!order.txn_id || !order.name || !order.items || !order.total) {
+            return res.status(400).json({ message: 'Invalid order data' });
+        }
+        console.log(req)
+        console.log(order);
+        const parseData={
+            uid:order.txn_id,
+            user:order.name,
+            products:order.items,
+            total:order.total,
+        }
+        const newOrder = await Order.create(parseData);
         newOrder.save();
+        res.status(201).json({ message: 'Order created', order: newOrder });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

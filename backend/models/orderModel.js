@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema({
     uid: {
         type: String,
-        required: [true, 'An order must have an id'],
+        required: [false, 'An order must have an id'],
     },
     user: {
         type: String,
