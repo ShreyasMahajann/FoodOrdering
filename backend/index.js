@@ -3,11 +3,13 @@ const app = express();
 const routes = require('./routes/routes');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
 
 const MAX_RETRIES = 5;
 const RETRY_INTERVAL = 5000; // 5 seconds
+
 // Set up CORS
 // app.use(cors({
 //   origin: [`${process.env.FRONTEND}`,'http://localhost:3000','https://api.merch.ccstiet.com','https://merch.ccstiet.com'], // Your frontend origins
@@ -17,9 +19,11 @@ const RETRY_INTERVAL = 5000; // 5 seconds
 app.use(cors());
 
 // 1) GLOBAL MIDDLEWARES
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(routes);
-// db connection
 
+// db connection
 let retryCount = 0;
 
 function connectToDB() {
@@ -35,7 +39,7 @@ function connectToDB() {
         console.error('DB connection failed:', err.message);
         retryConnection();
     });
-    }
+}
 
 function retryConnection() {
     if (retryCount < MAX_RETRIES) {

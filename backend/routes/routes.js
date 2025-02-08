@@ -15,10 +15,10 @@ router.get('/order/:id',deleteOrder);
 // router.use(verifyToken);
 
 // User routes (protected)
-router.use('/user', userRoutes);
+// router.use('/user', userRoutes);
 
 // Admin routes (extra protection)
 // router.use(isAdmin);
-router.use('/admin', adminRoutes);
+// router.use('/admin', adminRoutes);
 
 module.exports = router;
