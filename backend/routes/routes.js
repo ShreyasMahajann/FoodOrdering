@@ -9,7 +9,7 @@ const adminRoutes = require('./admin');
 router.get('/products', products);
 router.post('/order',order);
 router.get('/getOrders',getOrders);
-router.get('/order/:id',deleteOrder);
+router.get('/deleteOrder/:id',deleteOrder);
 
 // Middleware applied to all routes after this
 // router.use(verifyToken);
