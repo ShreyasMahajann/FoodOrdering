@@ -9,12 +9,12 @@ require('dotenv').config();
 const MAX_RETRIES = 5;
 const RETRY_INTERVAL = 5000; // 5 seconds
 // Set up CORS
-app.use(cors({
-  origin: [`${process.env.FRONTEND}`,'http://localhost:3000','https://api.merch.ccstiet.com','https://merch.ccstiet.com'], // Your frontend origins
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: [`${process.env.FRONTEND}`,'http://localhost:3000','https://api.merch.ccstiet.com','https://merch.ccstiet.com'], // Your frontend origins
+//   credentials: true,
+// }));
 // allow all origin
-// app.use(cors());
+app.use(cors());
 
 // 1) GLOBAL MIDDLEWARES
 app.use(routes);
